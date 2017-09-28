@@ -25,7 +25,7 @@ export default class HomeguidView extends Component {
         return (
             <View style={styles.container}>
                 <SpacingView/>
-                <View>
+                <View style={styles.guidItems}>
                     <HomeguidItem/>
                     <HomeguidItem/>
                     <HomeguidItem/>
@@ -50,6 +50,12 @@ const styles = StyleSheet.create({
         //borderBottomWidth:1,
         //borderBottomColor:Color.border
         //backgroundColor:'red',
+    },
+    guidItems:{
+        flexDirection:'row',
+        justifyContent:'center',
+        flexWrap: 'wrap',
+        width:Screen.width
     },
 
 });

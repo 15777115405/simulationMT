@@ -29,11 +29,13 @@ export default class HomeguidItem extends Component {
 
 const styles = StyleSheet.create({
     container: {
-        alignSelf: 'stretch',
         justifyContent: 'center',
         alignItems: 'center',
         height:80,
-        width:Screen.width/5
+        width:Screen.width/2-1*Screen.onePixel,
+        backgroundColor:'lightblue',
+        borderWidth:Screen.onePixel,
+        borderColor:Color.border,
     },
     img:{
         width:Screen.width/7,
