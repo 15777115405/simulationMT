@@ -60,12 +60,13 @@ const styles = StyleSheet.create({
         flexDirection:'row',
         justifyContent:'center',
         //padding:10,
-        margin:10,
+        marginTop:10,
         marginLeft:0,
         marginRight:0,
         paddingBottom:10,
         borderBottomWidth:1,
-        borderBottomColor:Color.border
+        borderBottomColor:Color.border,
+
     },
     scroll:{
         flexDirection:'row',
