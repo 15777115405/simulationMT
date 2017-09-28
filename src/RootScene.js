@@ -12,6 +12,7 @@ import {
     StatusBar,
 } from 'react-native';
 import Api from './Api';
+import {Screen,Color }from './common';
 import Tabbar from './widget/Tabbar';
 
 export default class RootScene extends Component {
@@ -42,7 +43,7 @@ export default class RootScene extends Component {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: 'lightblue',
+        backgroundColor: Color.background,
     },
     tab:{
         flex:1,

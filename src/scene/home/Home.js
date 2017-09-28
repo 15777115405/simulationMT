@@ -17,6 +17,7 @@ import {
 import HomeHeader from './HomeHeader';
 import Banner from '../../widget/Banner';
 import HomemenuView from './HomemenuView';
+import {Screen,Color }from '../../common';
 import Api from '../../Api';
 export default class Home extends Component {
     constructor(props){
@@ -42,7 +43,8 @@ const styles = StyleSheet.create({
         flex: 1,
         justifyContent: 'flex-start',
         //alignItems: 'center',
-        backgroundColor: '#F5FCFF',
+        backgroundColor: Color.background,
+       // backgroundColor: 'red',
     },
     text:{
        // fontSize:20

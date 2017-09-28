@@ -7,7 +7,7 @@
  */
 
 import Screen from './Screen'
-import system from './system'
-//import tool from './tool'
+//import system from './system'
+import Color from './Color'
 
-export {Screen,system}
+export {Screen,Color}

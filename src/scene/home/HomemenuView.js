@@ -13,7 +13,7 @@ import {
     TouchableOpacity,
     ScrollView
 } from 'react-native';
-import {Screen,system }from '../../common';
+import {Screen,Color }from '../../common';
 import HomemenuItem from './HomemenuItem';
 export default class HomemenuView extends Component {
     constructor(props){
@@ -65,7 +65,7 @@ const styles = StyleSheet.create({
         marginRight:0,
         paddingBottom:10,
         borderBottomWidth:1,
-        borderBottomColor:'#D3D3D4'
+        borderBottomColor:Color.border
     },
     scroll:{
         flexDirection:'row',

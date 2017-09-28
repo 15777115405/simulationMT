@@ -13,6 +13,7 @@ import {
     TouchableOpacity
 } from 'react-native';
 import NavigationItem from '../../widget/NavigationItem';
+import {Screen,Color }from '../../common';
 export default class Home extends Component {
     render() {
       // let img=require('../../img/Home/navigationItem_right.png')
@@ -38,7 +39,7 @@ const styles = StyleSheet.create({
         flexDirection:'row',
         justifyContent: 'center',
         alignItems: 'center',
-        backgroundColor: '#06C0AD',
+        backgroundColor: Color.theme,
         //marginTop:10,
         height:50
     },

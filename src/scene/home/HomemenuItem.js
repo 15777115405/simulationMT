@@ -12,7 +12,7 @@ import {
     Image,
     TouchableOpacity
 } from 'react-native';
-import {Screen,system }from '../../common';
+import {Screen,Color }from '../../common';
 export default class HomemenuItem extends Component {
     constructor(props){
         super(props)
@@ -21,7 +21,7 @@ export default class HomemenuItem extends Component {
         return (
             <TouchableOpacity style={styles.container}>
                <Image style={styles.img} source={this.props.img}/>
-                <Text>{this.props.text}</Text>
+               <Text>{this.props.text}</Text>
             </TouchableOpacity>
         );
     }
