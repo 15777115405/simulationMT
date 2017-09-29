@@ -18,8 +18,10 @@ import HomemenuItem from './HomemenuItem';
 export default class HomemenuView extends Component {
     constructor(props){
         super(props)
+
     }
-    render() {
+
+        render() {
         let items=[];
         let keys=1;
         this.props.items.forEach(item=>{
@@ -29,7 +31,6 @@ export default class HomemenuView extends Component {
             keys++;
         });
         return (
-
             <View style={styles.container}>
             <ScrollView style={styles.scroll}
                         horizontal
