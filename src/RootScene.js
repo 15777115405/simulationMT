@@ -22,11 +22,13 @@ export default class RootScene extends Component {
             selectedTab: 'home',
            Api: new Api()
         }
-    //  console.log('Api=>',this.state.Api);
+     //console.log('Api=>',this.state.Api);
     }
+
     render() {
         return (
             <ScrollView
+                //pagingEnabled
                 contentContainerStyle={{flex:1}}
                 keyboardDismissMode='on-drag'
                 keyboardShouldPersistTaps="never"
