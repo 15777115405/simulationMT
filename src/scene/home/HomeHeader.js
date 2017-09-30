@@ -16,7 +16,6 @@ import NavigationItem from '../../widget/NavigationItem';
 import {Screen,Color }from '../../common';
 export default class Home extends Component {
     render() {
-      // let img=require('../../img/Home/navigationItem_right.png')
         return (
             <View style={styles.container}>
                     <NavigationItem text="定位" />
@@ -28,7 +27,6 @@ export default class Home extends Component {
                     </TouchableOpacity>
                 </View>
                     <NavigationItem  img={require('../../img/Home/navigationItem_right.png')}/>
-
             </View>
         );
     }

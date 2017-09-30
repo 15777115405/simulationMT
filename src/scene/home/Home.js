@@ -32,44 +32,27 @@ export default class Home extends Component {
         }
     }
     componentDidMount() {
-        console.log('componentWillDidMount');
         this.requestDiscount();
-       // this.start()
-
     }
-    // componentDidMount() {
-    //     this.requestDiscount();
-    // }
-    //    async start () {
-    //     // 在这里使用起来就像同步代码那样直观
-    //     console.log('start');
-    //     await sleep(3000);
-    //     console.log('end');
-    // };
     async requestDiscount() {
         try {
             let response = await fetch(this.state.Api.discount);
             let json = await response.json();
             this.setState({discounts: json.data});
-            console.log('this.state.discounts(home)', this.state.discounts);
         } catch (error) {
             alert(error)
         }
     }
-
     render() {
-        //console.log('this.state.discounts(rend)', this.state.discounts);
         return (
             <View style={styles.container}>
                 <StatusBar backgroundColor={'rgba(6,192,173,0.9)'} />
                 <HomeHeader/>
                 <ScrollView
                    pagingEnabled
-                   showsHorizontalScrollIndicator={false}
                    showsVerticalScrollIndicator ={false}
                 >
                 <Banner img={this.state.Api.homebanner_img}/>
-                   {/*<View> <Text>{this.state.discounts}1111</Text></View>*/}
                 <HomemenuView items={this.state.Api.homemenu}/>
                 <HomeguidView items={this.state.discounts}/>
                 </ScrollView>

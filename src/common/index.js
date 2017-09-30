@@ -7,7 +7,7 @@
  */
 
 import Screen from './Screen'
-//import system from './system'
+import Stylecustomize from './Stylecustomize'
 import Color from './Color'
 
-export {Screen,Color}
+export {Screen,Color,Stylecustomize}

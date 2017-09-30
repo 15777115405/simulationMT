@@ -33,7 +33,6 @@ export default class HomeguidView extends Component {
     componentWillReceiveProps(nextProps){
         if(nextProps.items!==''){
             this.foreach(nextProps)
-
         }
     }
      async foreach(nextProps) {
@@ -46,11 +45,10 @@ export default class HomeguidView extends Component {
             keys++;
         });
         this.setState({discounts: items});
-        console.log('items', this.state.discounts);
+      //  console.log('items', this.state.discounts);
      }
 
     render() {
-        //console.log('render', this.state.discounts);
         return (
             <View style={styles.container}>
                 <SpacingView/>

@@ -16,7 +16,6 @@ import {
 export default class Home extends Component {
     constructor(props){
         super(props)
-        console.log(this.props.text);
     }
     render() {
         let text=this.props.text && <Text style={styles.text}>{this.props.text}</Text>;
