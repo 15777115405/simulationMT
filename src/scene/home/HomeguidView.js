@@ -21,55 +21,41 @@ export default class HomeguidView extends Component {
     constructor(props) {
         super(props)
         this.state = {
-            discounts: '',
-            items: ''
+            discounts:[
+                <HomeguidItem key={1}/>,
+                <HomeguidItem key={2}/>,
+                <HomeguidItem key={3}/>,
+                <HomeguidItem key={4}/>,],
+            gitems: ''
         }
     }
 
-    componentWillMount() {
-        //this.requestDiscount();
-        //this.foreach();
-       // console.log('this.props.items(guidview)',this.props.items);
+    componentWillReceiveProps(nextProps){
+        if(nextProps.items!==''){
+            this.foreach(nextProps)
 
+        }
     }
-    componentWillReceiveProps(){
-        console.log('componentWillReceivePropsthis.props.items(guidview)',this.props.items);
-    }
-
-    // async requestDiscount() {
-    //     try {
-    //         let response = await fetch(this.props.items)
-    //         let json = await response.json()
-    //         this.setState({discounts: json.data})
-    //         console.log('this.setState', this.state.discounts);
-    //     } catch (error) {
-    //         alert(error)
-    //     }
-    // }
-
-    // foreach() {
-    //     let items=[];
-    //     let keys=1;
-    //    // console.log('this.state.discounts', this.state.discounts);
-    // //    this.state.discounts.forEach(item=>{
-    // //         items.push(
-    // //             <HomeguidItem items={item} key={keys}/>
-    // //         );
-    // //         keys++;
-    // //     });
-    // //
-    // //
-    // //     this.setState({
-    // //         items: items
-    // //     });
-    //  }
+     async foreach(nextProps) {
+        let items=[];
+        let keys=1;
+        await nextProps.items.forEach(item=>{
+            items.push(
+                <HomeguidItem items={item} key={keys}/>
+            );
+            keys++;
+        });
+        this.setState({discounts: items});
+        console.log('items', this.state.discounts);
+     }
 
     render() {
+        //console.log('render', this.state.discounts);
         return (
             <View style={styles.container}>
                 <SpacingView/>
                 <View style={styles.guidItems}>
-                    {/*{this.state.items}*/}
+                    {this.state.discounts}
                 </View>
                 <SpacingView/>
             </View>

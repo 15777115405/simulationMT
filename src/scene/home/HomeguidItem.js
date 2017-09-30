@@ -15,13 +15,31 @@ import {
 import {Screen,Color }from '../../common';
 export default class HomeguidItem extends Component {
     constructor(props){
-        super(props)
+        super(props);
+        this.state={
+            Text:'',
+            img:View
+        }
+    }
+
+    async componentWillReceiveProps(nextProps) {
+            let imguri=nextProps.items.imageurl.replace('w.h', '120.0');
+           await this.setState({
+                Text: nextProps.items.deputytitle,
+                img : <Image style={styles.img} source={{uri:imguri}}/>
+
+            });
+           // console.log('this.state.Text(HomeguidItem)',this.state.img);
+
     }
     render() {
         return (
-            <TouchableOpacity style={styles.container}>
-                <Image style={styles.img} source={this.props.img}/>
-                <Text>{this.props.text}</Text>
+            <TouchableOpacity >
+                <View style={styles.container}>
+                    <Text>{ this.state.Text}</Text>
+                    {this.state.img}
+                {/*<Image style={styles.img} source={{uri:this.state.img}}/>*/}
+                </View>
             </TouchableOpacity>
         );
     }
@@ -29,11 +47,13 @@ export default class HomeguidItem extends Component {
 
 const styles = StyleSheet.create({
     container: {
+        flexDirection:'row',
+        alignSelf: 'stretch',
         justifyContent: 'center',
         alignItems: 'center',
         height:80,
         width:Screen.width/2-1*Screen.onePixel,
-        backgroundColor:'lightblue',
+        backgroundColor:Color.theme,
         borderWidth:Screen.onePixel,
         borderColor:Color.border,
     },
@@ -41,7 +61,7 @@ const styles = StyleSheet.create({
         width:Screen.width/7,
         height:Screen.width/7,
         resizeMode: 'stretch',
-
+        backgroundColor:'#e0e0e0'
     },
 
 
