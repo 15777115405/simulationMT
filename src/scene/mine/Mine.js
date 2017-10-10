@@ -4,43 +4,98 @@
  * @flow
  */
 
-import React, { Component } from 'react';
-import {
-    StyleSheet,
-    Text,
-    View
-} from 'react-native';
+import React, {Component} from "react";
+import {StyleSheet, Text, View,AsyncStorage} from "react-native";
+import {graphql, gql} from "react-apollo";
+import Login from "./Login";
 
-export default class Mine extends Component {
+class MineScene extends Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            username: "",
+            password: ""
+        };
+    }
+    _onsubmit = async (item) => {
+        //const { username, password } = item;
+        try {
+            const resData = await this.props.mutate({variables: {
+                "v": {
+                    "username": item.username,
+                    "password": item.password,
+                },
+                "service": 'user' // 声明要访问的模块
+            }});
+
+            console.log('user data', resData);
+
+            if(resData.data.login.token) {
+                AsyncStorage.setItem('token', resData.data.login.token);
+            }
+
+
+        } catch(error) {
+            console.log(error)
+        }
+    };
     render() {
         return (
             <View style={styles.container}>
-                <Text style={styles.welcome}>
-                    Welcome to Mine!
-                </Text>
-
+               <Login onsubmit={this._onsubmit}  />
             </View>
         );
     }
 }
-
+const loginmutation = gql`
+  mutation ll($v: FormLogin!) {
+    login(form: $v) {
+      token
+    }
+  }
+`;
+const Mine = graphql(loginmutation)(MineScene);
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        justifyContent: 'center',
-        alignItems: 'center',
-        backgroundColor: '#F5FCFF',
+        alignSelf: "stretch",
+        paddingLeft: 10,
+        paddingRight: 10,
+        justifyContent: "center",
+        alignItems: "center",
+        backgroundColor: "#f3f3f3"
     },
-    welcome: {
-        fontSize: 20,
-        textAlign: 'center',
-        margin: 10,
+    logo: {
+        width: 160,
+        height: 160
+        //marginTop: 80
     },
-    instructions: {
-        textAlign: 'center',
-        color: '#333333',
-        marginBottom: 5,
+    input: {
+        alignSelf: "stretch",
+        marginTop: 10,
+        height: 45,
+        borderRadius: 5,
+        borderWidth: 1,
+        borderColor: "lightblue"
     },
+    text: {
+        fontWeight: "bold",
+        fontSize: 14,
+        color: "#FFF"
+    },
+    btn: {
+        alignSelf: "stretch",
+        alignItems: "center",
+        justifyContent: "center",
+        backgroundColor: "#3333FF",
+        height: 40,
+        borderRadius: 5,
+        marginTop: 10
+    }
 });
+
+
+
+export default Mine
 
 

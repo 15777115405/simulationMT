@@ -4,20 +4,61 @@
  * @flow
  */
 
-import React, { Component } from 'react';
+import React, { Component } from "react";
 import {
     StyleSheet,
     Text,
-    View
-} from 'react-native';
+    View,
+    Image,
+    TextInput,
+    TouchableOpacity,
+} from "react-native";
 
-export default class Nearby extends Component {
+class Login extends Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            username: "",
+            password: ""
+        };
+    }
+    _onPress=()=>{
+        this.props.onsubmit( this.state);
+    };
     render() {
         return (
             <View style={styles.container}>
-                <Text style={styles.welcome}>
-                    Welcome to Nearby!
-                </Text>
+                <Image
+                    source={{
+                        uri:
+                            "http://oss-hz.qianmi.com/qianmicom/u/cms/qmwww/201511/03102524l6ur.png"
+                    }}
+                    style={styles.logo}
+                />
+                <TextInput
+                    onEndEditing={item => {
+                        this.setState({ username: item.nativeEvent.text });
+                        console.log(item.nativeEvent.text);
+                    }}
+                    style={styles.input}
+                    placeholder="username"
+                />
+                <TextInput
+                    style={styles.input}
+                    onEndEditing={item => {
+                        this.setState({ password: item.nativeEvent.text });
+                        console.log(item.nativeEvent.text);
+                    }}
+                    placeholder="password"
+                    password={true}
+                />
+
+                <TouchableOpacity
+                    style={styles.btn}
+                    onPress={() => this._onPress()}
+                >
+                    <Text style={styles.text}>login</Text>
+                </TouchableOpacity>
             </View>
         );
     }
@@ -26,20 +67,40 @@ export default class Nearby extends Component {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        justifyContent: 'center',
-        alignItems: 'center',
-        backgroundColor: '#F5FCFF',
+        alignSelf: "stretch",
+        paddingLeft: 10,
+        paddingRight: 10,
+        justifyContent: "center",
+        alignItems: "center",
+        backgroundColor: "#f3f3f3"
     },
-    welcome: {
-        fontSize: 20,
-        textAlign: 'center',
-        margin: 10,
+    logo: {
+        width: 160,
+        height: 160
+        //marginTop: 80
     },
-    instructions: {
-        textAlign: 'center',
-        color: '#333333',
-        marginBottom: 5,
+    input: {
+        alignSelf: "stretch",
+        marginTop: 10,
+        height: 45,
+        borderRadius: 5,
+        borderWidth: 1,
+        borderColor: "lightblue"
     },
+    text: {
+        fontWeight: "bold",
+        fontSize: 14,
+        color: "#FFF"
+    },
+    btn: {
+        alignSelf: "stretch",
+        alignItems: "center",
+        justifyContent: "center",
+        backgroundColor: "#3333FF",
+        height: 40,
+        borderRadius: 5,
+        marginTop: 10
+    }
 });
 
-
+export default Login;

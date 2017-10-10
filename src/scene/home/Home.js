@@ -15,13 +15,9 @@ import {
   ScrollView,
     FlatList
 } from "react-native";
-
-import HomeHeader from "./HomeHeader";
+import {ListHeader,HomeHeader,HomeguidView,HomemenuView} from "./";
 import Banner from "../../widget/Banner";
-import HomemenuView from "./HomemenuView";
-import HomeguidView from "./HomeguidView";
 import { Screen, Color } from "../../common";
-
 import Api from "../../Api";
 export default class Home extends Component {
   constructor(props) {
@@ -53,9 +49,17 @@ export default class Home extends Component {
           <HomemenuView items={this.state.Api.homemenu} />
           <HomeguidView items={this.state.discounts} />
           <View style={styles.textview}>
+            <FlatList
+
+
+
+
+
+
+
+            />
             <Text style={styles.text}>-猜你喜欢-</Text>
           </View>
-          <FlatList/>
         </ScrollView>
       </View>
     );
