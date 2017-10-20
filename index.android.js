@@ -7,42 +7,24 @@
 import React, {Component} from 'react';
 import {
     AppRegistry,
-    StyleSheet,
-    Image,
-    Text,
-    View
-
+    View,
 } from 'react-native';
-
+import {Provider} from 'react-redux';
 import RootScene from './src/RootScene';
+//GLOBAL.XMLHttpRequest = GLOBAL.originalXMLHttpRequest || GLOBAL.XMLHttpRequest;
+import configureStore from './src/redux/store/ConfigureStore';
 
+const store = configureStore();
 export default class simulationMT extends Component {
     render() {
         return (
-            <View style={styles.container}>
+            <Provider
+            store={store}
+            >
                 <RootScene/>
-            </View>
+            </Provider>
         );
     }
 }
-
-const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        justifyContent: 'center',
-        //alignItems: 'center',
-        backgroundColor: '#F5FCFF',
-    },
-    welcome: {
-        fontSize: 20,
-        textAlign: 'center',
-        margin: 10,
-    },
-    instructions: {
-        textAlign: 'center',
-        color: '#333333',
-        marginBottom: 5,
-    },
-});
 
 AppRegistry.registerComponent('simulationMT', () => simulationMT);

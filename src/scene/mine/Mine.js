@@ -19,6 +19,7 @@ class MineScene extends Component {
     }
     _onsubmit = async (item) => {
         //const { username, password } = item;
+        console.log("item", this.props);
         try {
             const resData = await this.props.mutate({variables: {
                 "v": {
@@ -42,7 +43,7 @@ class MineScene extends Component {
     render() {
         return (
             <View style={styles.container}>
-               <Login onsubmit={this._onsubmit}  />
+               <Login onsubmit={this._onsubmit}  aa="bb"/>
             </View>
         );
     }

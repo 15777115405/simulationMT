@@ -5,11 +5,17 @@
  */
 
 import React, {Component} from "react";
-import {StyleSheet, Text, View, AsyncStorage} from "react-native";
-import {graphql, gql} from "react-apollo";
-import EditCity from "./EditCity";
+import {
+    StyleSheet,
+    Text,
+    View,
+    Image,
+    TextInput,
+    TouchableOpacity,
+    AsyncStorage
+} from "react-native";
 
-class NearbyScene extends Component {
+class QuiryCty extends Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -19,57 +25,42 @@ class NearbyScene extends Component {
         };
     }
 
-    _onsubmit = async item => {
-        //const { username, password } = item;
-        console.log("item", item);
-        try {
-            const resData = await this.props.mutate({
-                variables: {
-                    t: this.state.token,
-                    p: {
-                        city: item.city,
-                        phone:item.phone
-                    },
-                    service: "user" // 声明要访问的模块
-                }
-            });
-            console.log("user data", resData);
-        } catch (error) {
-            console.log(error);
-        }
+    _onPress = () => {
+        this.props.onsubmit();
     };
 
     componentDidMount() {
-        AsyncStorage.getItem("token").then(token => {
-            this.setState({
-                token: token
-            });
-        });
+
     }
 
+
     render() {
+      //  console.log("quiry.this.props", this.props);
         return (
             <View style={styles.container}>
-                <EditCity onsubmit={this._onsubmit}/>
+                <Image
+                    source={{
+                        uri:
+                            "http://oss-hz.qianmi.com/qianmicom/u/cms/qmwww/201511/03102524l6ur.png"
+                    }}
+                    style={styles.logo}
+                />
+                <Text style={styles.input}>city: {this.props.item && this.props.item.city}</Text>
+                <Text style={styles.input}>phone: {this.props.item && this.props.item.phone}</Text>
+                <TouchableOpacity
+                    style={styles.btn}
+                    onPress={() => this._onPress()}
+                >
+                    <Text style={styles.text}>刷新</Text>
+                </TouchableOpacity>
             </View>
         );
     }
 }
 
-const editCity = gql`
-  mutation editCity($t: String!, $p: FormUserProfile!) {
-  meEdit(token: $t) {
-    editProfile(form: $p) {
-      city,
-      phone
-    }
-  }
-}
-`;
-const Nearby = graphql(editCity)(NearbyScene);
 const styles = StyleSheet.create({
     container: {
-        flex: 1,
+        //flex: 1,
         alignSelf: "stretch",
         paddingLeft: 10,
         paddingRight: 10,
@@ -106,4 +97,4 @@ const styles = StyleSheet.create({
     }
 });
 
-export default Nearby;
+export default QuiryCty;

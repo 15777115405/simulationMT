@@ -4,20 +4,37 @@
  * @flow
  */
 
-import React, { Component } from 'react';
+import React, {Component} from 'react';
 import {
     StyleSheet,
     Text,
-    View
+    View,
+    TouchableOpacity
 } from 'react-native';
+import RadioModalItem from "./Radio";
+import SingleBox from "../../widget/SingleBox";
 
 export default class Stroll extends Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            ViewBackgroundColor: "test"
+        };
+    }
+
+    _onPress=  (item) => {
+        console.log("good",item)
+    };
+
     render() {
+
         return (
             <View style={styles.container}>
-                <Text style={styles.welcome}>
-                    Welcome to Stroll!
-                </Text>
+
+                <RadioModalItem/>
+                <SingleBox Radius={30} text="按钮"
+                           onPress={this._onPress}
+                />
 
             </View>
         );

@@ -16,6 +16,7 @@ import {ApolloClient, createNetworkInterface,ApolloProvider} from 'react-apollo'
 import Api from './Api';
 import {Screen, Color} from './common';
 import Tabbar from './widget/Tabbar';
+import "./widget/GlobalStorage";//初始化GlobalStorage组件
 
 const _networkInterface = createNetworkInterface({uri: 'https://api.yichui.net/api/xing/user/graphql'});
 const client = new ApolloClient({
@@ -29,15 +30,15 @@ _networkInterface.use([
             }
 
             req.options.headers["X-SERVER"] = req.request.variables["service"];
-            // req.options.headers["Authentication"] = Bearer ${_token};
+            //req.options.headers["Authentication"] = Bearer ${_token};
             AsyncStorage.getItem('token')
                 .then(token => {
-                    req.options.headers["Authentication"] = token;
+                    req.options.headers["Authentication"] = "Bearer " +token;
                     //delete req.request.variables.service;
                     next();
                 });
 
-            console.log('headers ', req.options);
+            //console.log('RootScene.headers ', req.options);
         }
     }
 ]);
@@ -71,21 +72,12 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         backgroundColor: Color.background,
+        //height:1000,
     },
     tab: {
         flex: 1,
         height: 55,
-        //backgroundColor:'red',
     },
-    welcome: {
-        fontSize: 20,
-        textAlign: 'center',
-        margin: 10,
-    },
-    instructions: {
-        textAlign: 'center',
-        color: '#333333',
-        marginBottom: 5,
-    },
+
 });
 

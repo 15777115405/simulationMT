@@ -4,12 +4,12 @@
  * @flow
  */
 
-import React, {Component} from "react";
-import {StyleSheet, Text, View, AsyncStorage} from "react-native";
-import {graphql, gql} from "react-apollo";
-import EditCity from "./EditCity";
+import React, { Component } from "react";
+import { StyleSheet, Text, View, AsyncStorage } from "react-native";
+import { graphql, gql, withApollo } from "react-apollo";
+import QuiryCty from "./QuiryCty";
 
-class NearbyScene extends Component {
+class OrderScene extends Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -19,24 +19,19 @@ class NearbyScene extends Component {
         };
     }
 
-    _onsubmit = async item => {
-        //const { username, password } = item;
-        console.log("item", item);
-        try {
-            const resData = await this.props.mutate({
+    _onsubmit = () => {
+        console.log("item", this.props);
+        this.props.client
+            .query({
+                query: editCity,
                 variables: {
                     t: this.state.token,
-                    p: {
-                        city: item.city,
-                        phone:item.phone
-                    },
                     service: "user" // 声明要访问的模块
                 }
+            })
+            .then(res => {
+                console.log("res", res);
             });
-            console.log("user data", resData);
-        } catch (error) {
-            console.log(error);
-        }
     };
 
     componentDidMount() {
@@ -48,25 +43,28 @@ class NearbyScene extends Component {
     }
 
     render() {
+        console.log("item", this.props);
         return (
             <View style={styles.container}>
-                <EditCity onsubmit={this._onsubmit}/>
+                <QuiryCty onsubmit={this._onsubmit} item={this.state} />
             </View>
         );
     }
 }
 
 const editCity = gql`
-  mutation editCity($t: String!, $p: FormUserProfile!) {
-  meEdit(token: $t) {
-    editProfile(form: $p) {
-      city,
-      phone
+  query mycity($t: String!) {
+    me(token: $t) {
+      detail {
+        profile {
+          city
+          phone
+        }
+      }
     }
   }
-}
 `;
-const Nearby = graphql(editCity)(NearbyScene);
+const Order = withApollo(OrderScene);
 const styles = StyleSheet.create({
     container: {
         flex: 1,
@@ -106,4 +104,4 @@ const styles = StyleSheet.create({
     }
 });
 
-export default Nearby;
+export default Order;
